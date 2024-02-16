@@ -1,13 +1,12 @@
 import java.util.Scanner;
 
 public class Main {
-// test
+
     public static void main(String[] args) {
 
         System.out.println("Welcome to the Budget Tracker!");
         System.out.println("Let's begin!");
 
-        BudgetTracker budgetTracker = new BudgetTracker();
         Scanner scanner = new Scanner(System.in);
 
         try {
@@ -16,28 +15,47 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println("Enter your income:");
-        double initialMonthlyIncome = scanner.nextDouble();
+        double initialMonthlyIncome;
+        do {
+            System.out.println("Enter your income:");
+            while (!scanner.hasNextDouble()) {
+                System.out.println("Invalid input! Income needs to be a number!");
+                scanner.next();
+            }
+            initialMonthlyIncome = scanner.nextDouble();
+            if (initialMonthlyIncome < 0) {
+                System.out.println("Income needs to be a positive number!");
+                scanner.nextLine();
+            }
+
+        } while (initialMonthlyIncome <= 0);
+        System.out.println("Income inserted!");
+
 
         double totalIncome = initialMonthlyIncome;
         double totalExpenses = 0.0;
+        double goalPercentage;
 
-        System.out.println("Please enter your savings goal(%): ");
-        double goalPercentage = scanner.nextDouble();
-        if (goalPercentage <= 0) {
-            System.out.println("Be ambitious! Choose a bigger savings goal!");
-            scanner.nextLine();
 
-            scanner.nextLine();
-        } else {
-            System.out.println("That's a great goal!");
+        while (true) {
+            System.out.println("Please enter your savings goal(%): ");
+            goalPercentage = scanner.nextDouble();
+
+            if (goalPercentage <= 0) {
+                System.out.println("Be ambitious! Choose a bigger savings goal!");
+                scanner.nextLine();
+
+            } else {
+                System.out.println("Goal has been set successfully");
+                break;
+            }
         }
 
+        System.out.println("That's great! With your savings goal, you'll be able to save " + (totalIncome * goalPercentage / 100) + " euros monthly!");
 
         while (true) {
 
             try {
-                // Delay for 1 second
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
