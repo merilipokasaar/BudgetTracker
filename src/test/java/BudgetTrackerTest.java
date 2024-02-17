@@ -4,14 +4,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class BudgetTrackerTest {
 
-@Test
+    @Test
     void
     testStart() {
 
-    BudgetTracker budgetTracker = new BudgetTracker();
-    budgetTracker.start();
+        BudgetTracker budgetTracker = new BudgetTracker();
+        budgetTracker.start();
 
-   /////
     }
 }
 
